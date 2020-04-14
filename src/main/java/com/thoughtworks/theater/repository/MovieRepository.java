@@ -10,18 +10,24 @@ import java.util.List;
 
 @Repository
 public interface MovieRepository extends CrudRepository<Movie, String> {
-  // TODO: complete this repository
+    // TODO: complete this repository
 
-  @Query("SELECT * FROM movie WHERE has_ticket = TRUE")
-  Iterable<Movie> getInTheatersMovies();
+    @Query("SELECT * FROM movie WHERE has_ticket = TRUE")
+    Iterable<Movie> getInTheatersMovies();
 
-  @Query("SELECT * FROM movie WHERE year IN ('2019', '2020') AND rating > 7")
-  Iterable<Movie> getNewMovies();
+    @Query("SELECT * FROM movie WHERE year IN ('2019', '2020') AND rating > 7")
+    Iterable<Movie> getNewMovies();
 
-  @Query("SELECT * from movie ORDER BY rating DESC LIMIT 250")
-  Iterable<Movie> getTop250Movies();
+    @Query("SELECT * from movie ORDER BY rating DESC LIMIT 250")
+    Iterable<Movie> getTop250Movies();
 
+    @Query("SELECT * from movie ORDER BY rating DESC LIMIT :start,:count")
+    Iterable<Movie> getTop250Movies(@Param("start") Integer start,
+                                    @Param("count") Integer count);
 
-  @Query("SELECT * from movie WHERE title LIKE :word OR aka LIKE :word OR cast LIKE :word OR director LIKE :word OR genres LIKE :word OR tags LIKE :word")
-  List<Movie> searchMovieByKeyword(@Param("word") String word);
+    @Query("SELECT * FROM movie WHERE id = :id")
+    Movie getMovieById(@Param("id") String id);
+
+    @Query("SELECT * from movie WHERE title LIKE :word OR aka LIKE :word OR cast LIKE :word OR director LIKE :word OR genres LIKE :word OR tags LIKE :word")
+    List<Movie> searchMovieByKeyword(@Param("word") String word);
 }
