@@ -54,10 +54,10 @@ public class MovieController {
         return movieService.searchMovies(decodeKeyword);
     }
 
-    @GetMapping("/movie/similar_movies?movieId={movieId}")
+    @GetMapping("/movie/similar_movies/movieId={movieId}")
     public Iterable<Movie> getSimilarMovies(@PathVariable String movieId) {
         // TODO: implement this method
-        return null;
+        return movieService.getSimilarMovies(movieId);
     }
 
     @GetMapping("/movie/detail/{movieId}")

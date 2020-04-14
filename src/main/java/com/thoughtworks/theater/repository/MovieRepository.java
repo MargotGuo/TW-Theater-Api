@@ -30,4 +30,9 @@ public interface MovieRepository extends CrudRepository<Movie, String> {
 
     @Query("SELECT * from movie WHERE title LIKE :word OR aka LIKE :word OR cast LIKE :word OR director LIKE :word OR genres LIKE :word OR tags LIKE :word")
     List<Movie> searchMovieByKeyword(@Param("word") String word);
+
+    @Query("SELECT * from movie")
+    List<Movie> getAllMovie();
+
+
 }

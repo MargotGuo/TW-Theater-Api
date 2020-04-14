@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -55,6 +56,36 @@ public class MovieService {
         return (int) Arrays.stream(keywords)
                 .filter(keyword -> movie.toString().contains(keyword))
                 .count();
+    }
+
+    public List<Movie> getSimilarMovies(String movieId) {
+        Movie movie = movieRepository.getMovieById(movieId);
+        List<String> genres = Arrays.stream(movie.getGenres().split(",")).collect(Collectors.toList());
+        List<String> tags = Arrays.stream(movie.getTags().split(",")).collect(Collectors.toList());
+        String director = movie.getDirector();
+        return movieRepository.getAllMovie()
+                .stream()
+                .sorted((o1, o2) -> similarPercent(o2, genres, tags, director) - similarPercent(o1, genres, tags, director))
+                .filter(m->similarPercent(m,genres,tags,director)>1)
+                .limit(4)
+                .collect(Collectors.toList());
+    }
+
+    public int similarPercent(Movie movie, List<String> genres, List<String> tags, String director) {
+        int result = 0;
+        for (String genre : genres) {
+            if (movie.getGenres().contains(genre)) {
+                result += 3;
+            }
+        }
+        for (String tag : tags) {
+            if (movie.getTags().contains(tag)) {
+                result += 2;
+            }
+        }
+        if (movie.getDirector().contains(director))
+            result++;
+        return result;
     }
 
 
