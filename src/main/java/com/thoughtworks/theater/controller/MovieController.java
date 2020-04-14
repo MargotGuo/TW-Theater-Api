@@ -27,6 +27,12 @@ public class MovieController {
         return movieService.getNewMovies();
     }
 
+    @GetMapping("/movie/new_movies/start={start}&count={count}")
+    public Iterable<Movie> getNewMovies(@PathVariable Integer start, @PathVariable Integer count) {
+        // TODO: implement this method
+        return movieService.getNewMovies(start, count);
+    }
+
     @GetMapping("/movie/top250")
     public Iterable<Movie> getTop250Movies() {
         // TODO: implement this method

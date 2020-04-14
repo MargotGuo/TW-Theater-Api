@@ -31,6 +31,10 @@ public class MovieService {
         return movieRepository.getNewMovies();
     }
 
+    public Iterable<Movie> getNewMovies(Integer start, Integer count) {
+        return movieRepository.getNewMovies(start, count);
+    }
+
     public Iterable<Movie> getTop250Movies() {
         return movieRepository.getTop250Movies();
     }
