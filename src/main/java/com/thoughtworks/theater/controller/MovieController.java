@@ -76,6 +76,6 @@ public class MovieController {
                                                    @PathVariable Integer start,
                                                    @PathVariable Integer count) {
         // TODO: implement this method
-        return movieService.getCategoryMovies(genres, year, tag);
+        return movieService.getCategoryMovies(genres, year, tag, start, count);
     }
 }
