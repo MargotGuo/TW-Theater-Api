@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Iterator;
+
 @RestController
 public class MovieController {
 
@@ -34,10 +36,10 @@ public class MovieController {
     return movieService.getTop250Movies();
   }
 
-  @GetMapping("/movie/top250?start={start}&count={count}")
-  public Iterable<Movie> getTop250Movies(@PathVariable int start, @PathVariable int count) {
+  @GetMapping("/movie/top250/start={start}&count={count}")
+  public Iterable<Movie> getTop250Movies(@PathVariable Integer start, @PathVariable Integer count) {
     // TODO implement this method
-    return null;
+    return movieService.getTop250Movies(start, count);
   }
 
   @GetMapping("/movie/search?keyword={keyword}")

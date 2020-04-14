@@ -24,5 +24,9 @@ public class MovieService {
     public Iterable<Movie> getTop250Movies() {
         return movieRepository.getTop250Movies();
     }
+
+    public Iterable<Movie> getTop250Movies(Integer start, Integer count) {
+        return movieRepository.getTop250Movies(start, count);
+    }
     // TODO: complete this service
 }
