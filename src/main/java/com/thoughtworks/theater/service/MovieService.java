@@ -69,12 +69,14 @@ public class MovieService {
         List<String> genres = Arrays.stream(movie.getGenres().split(",")).collect(Collectors.toList());
         List<String> tags = Arrays.stream(movie.getTags().split(",")).collect(Collectors.toList());
         List<String> director = Arrays.stream(movie.getDirector().split(",")).collect(Collectors.toList());
-        return movieRepository.getAllMovie()
+        List<Movie> similarMovies = movieRepository.getAllMovie()
                 .stream()
                 .sorted((o1, o2) -> similarPercent(o2, genres, tags, director) - similarPercent(o1, genres, tags, director))
-                .filter(m->similarPercent(m,genres,tags,director)>1)
-                .limit(4)
+                .filter(m -> similarPercent(m, genres, tags, director) > 1)
+                .limit(11)
                 .collect(Collectors.toList());
+        similarMovies.remove(0);
+        return similarMovies;
     }
 
     public int similarPercent(Movie movie, List<String> genres, List<String> tags, List<String> directors) {
