@@ -54,7 +54,13 @@ public class MovieController {
   }
 
   @GetMapping("/movie/detail/{movieId}")
-  public Movie getStudent(@PathVariable String movieId) {
+  public Movie getMovieById(@PathVariable String movieId) {
+    // TODO: implement this method
+    return null;
+  }
+
+  @GetMapping("/movie/{tag}")
+  public Movie getMovieByTag(@PathVariable String tag) {
     // TODO: implement this method
     return null;
   }
