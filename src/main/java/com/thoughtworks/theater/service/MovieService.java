@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -14,6 +13,8 @@ import java.util.stream.Stream;
 
 @Service
 public class MovieService {
+
+    // TODO: complete this service
 
     private final MovieRepository movieRepository;
 
@@ -62,7 +63,7 @@ public class MovieService {
         Movie movie = movieRepository.getMovieById(movieId);
         List<String> genres = Arrays.stream(movie.getGenres().split(",")).collect(Collectors.toList());
         List<String> tags = Arrays.stream(movie.getTags().split(",")).collect(Collectors.toList());
-        String director = movie.getDirector();
+        List<String> director = Arrays.stream(movie.getDirector().split(",")).collect(Collectors.toList());
         return movieRepository.getAllMovie()
                 .stream()
                 .sorted((o1, o2) -> similarPercent(o2, genres, tags, director) - similarPercent(o1, genres, tags, director))
@@ -71,7 +72,7 @@ public class MovieService {
                 .collect(Collectors.toList());
     }
 
-    public int similarPercent(Movie movie, List<String> genres, List<String> tags, String director) {
+    public int similarPercent(Movie movie, List<String> genres, List<String> tags, List<String> directors) {
         int result = 0;
         for (String genre : genres) {
             if (movie.getGenres().contains(genre)) {
@@ -83,11 +84,15 @@ public class MovieService {
                 result += 2;
             }
         }
-        if (movie.getDirector().contains(director))
-            result++;
+        for (String director : directors) {
+            if (movie.getTags().contains(director)) {
+                result ++;
+            }
+        }
         return result;
     }
 
-
-    // TODO: complete this service
+    public Iterable<Movie> getMovieByGenres(String genres) {
+        return movieRepository.getMovieByGenres("%" + genres + "%");
+    }
 }

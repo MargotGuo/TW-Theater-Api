@@ -6,9 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-
 @RestController
 public class MovieController {
 
@@ -45,13 +42,7 @@ public class MovieController {
     @GetMapping("/movie/search/keyword={keyword}")
     public Iterable<Movie> searchMovies(@PathVariable String keyword) {
         // TODO: implement this method
-        String decodeKeyword = null;
-        try {
-            decodeKeyword = URLDecoder.decode(keyword, "utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return movieService.searchMovies(decodeKeyword);
+        return movieService.searchMovies(keyword);
     }
 
     @GetMapping("/movie/similar_movies/movieId={movieId}")
@@ -66,10 +57,9 @@ public class MovieController {
         return movieService.getMovieById(movieId);
     }
 
-    @GetMapping("/movie/{tag}")
-    public Movie getMovieByTag(@PathVariable String tag) {
+    @GetMapping("/movie/genres={genres}")
+    public Iterable<Movie> getMovieByGenres(@PathVariable String genres) {
         // TODO: implement this method
-        return null;
+        return movieService.getMovieByGenres(genres);
     }
-
 }
