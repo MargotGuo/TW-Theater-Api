@@ -5,6 +5,7 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Table("movie")
 public class Movie {
@@ -271,5 +272,79 @@ public class Movie {
 
   public void setYear(Date year) {
     this.year = year;
+  }
+
+  @Override
+  public String toString() {
+    return "Movie{" +
+        "aka='" + aka + '\'' +
+        ", alt='" + alt + '\'' +
+        ", cast='" + cast + '\'' +
+        ", collectCount=" + collectCount +
+        ", commentsCount=" + commentsCount +
+        ", countries='" + countries + '\'' +
+        ", director='" + director + '\'' +
+        ", durations='" + durations + '\'' +
+        ", genres='" + genres + '\'' +
+        ", hasSchedule=" + hasSchedule +
+        ", hasTicket=" + hasTicket +
+        ", hasVideo=" + hasVideo +
+        ", id='" + id + '\'' +
+        ", images='" + images + '\'' +
+        ", languages='" + languages + '\'' +
+        ", mainlandPubdate='" + mainlandPubdate + '\'' +
+        ", mobileUrl='" + mobileUrl + '\'' +
+        ", originalTitle='" + originalTitle + '\'' +
+        ", pubdates='" + pubdates + '\'' +
+        ", rating=" + rating +
+        ", ratingCount=" + ratingCount +
+        ", reviewsCount=" + reviewsCount +
+        ", shareUrl='" + shareUrl + '\'' +
+        ", summary='" + summary + '\'' +
+        ", tags='" + tags + '\'' +
+        ", title='" + title + '\'' +
+        ", writers='" + writers + '\'' +
+        ", year=" + year +
+        '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Movie movie = (Movie) o;
+    return collectCount == movie.collectCount &&
+        commentsCount == movie.commentsCount &&
+        hasSchedule == movie.hasSchedule &&
+        hasTicket == movie.hasTicket &&
+        hasVideo == movie.hasVideo &&
+        Double.compare(movie.rating, rating) == 0 &&
+        ratingCount == movie.ratingCount &&
+        reviewsCount == movie.reviewsCount &&
+        Objects.equals(aka, movie.aka) &&
+        Objects.equals(alt, movie.alt) &&
+        Objects.equals(cast, movie.cast) &&
+        Objects.equals(countries, movie.countries) &&
+        Objects.equals(director, movie.director) &&
+        Objects.equals(durations, movie.durations) &&
+        Objects.equals(genres, movie.genres) &&
+        Objects.equals(id, movie.id) &&
+        Objects.equals(images, movie.images) &&
+        Objects.equals(languages, movie.languages) &&
+        Objects.equals(mainlandPubdate, movie.mainlandPubdate) &&
+        Objects.equals(mobileUrl, movie.mobileUrl) &&
+        Objects.equals(originalTitle, movie.originalTitle) &&
+        Objects.equals(pubdates, movie.pubdates) &&
+        Objects.equals(shareUrl, movie.shareUrl) &&
+        Objects.equals(summary, movie.summary) &&
+        Objects.equals(tags, movie.tags) &&
+        Objects.equals(title, movie.title) &&
+        Objects.equals(writers, movie.writers) &&
+        Objects.equals(year, movie.year);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(aka, alt, cast, collectCount, commentsCount, countries, director, durations, genres, hasSchedule, hasTicket, hasVideo, id, images, languages, mainlandPubdate, mobileUrl, originalTitle, pubdates, rating, ratingCount, reviewsCount, shareUrl, summary, tags, title, writers, year);
   }
 }

@@ -5,7 +5,11 @@ import com.thoughtworks.theater.service.MovieService;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 @RestController
 public class MovieController {
@@ -40,11 +44,16 @@ public class MovieController {
     return null;
   }
 
-  @GetMapping("/movie/search?keyword={keyword}")
+  @GetMapping("/movie/search/keyword={keyword}")
   public Iterable<Movie> searchMovies(@PathVariable String keyword) {
     // TODO: implement this method
-    // 这里我没考虑清楚诶。。如果用户输入多个关键字用空格隔开，这里该怎么写
-    return null;
+    String decodeKeyword = null;
+    try {
+      decodeKeyword = URLDecoder.decode(keyword, "utf-8");
+    } catch (UnsupportedEncodingException e) {
+      e.printStackTrace();
+    }
+    return movieService.searchMovies(decodeKeyword);
   }
 
   @GetMapping("/movie/similar_movies?movieId={movieId}")
