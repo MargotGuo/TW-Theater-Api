@@ -104,7 +104,7 @@ public class MovieService {
         return movieRepository.getMovieByGenres("%" + genres + "%");
     }
 
-    public Iterable<Movie> getCategoryMovies(String genres, String year, String tag) {
-        return movieRepository.getCategoryMovies("%" + genres + "%", year, "%" + tag + "%");
+    public Iterable<Movie> getCategoryMovies(String genres, String year, String tag, Integer start, Integer count) {
+        return movieRepository.getCategoryMovies("%" + genres + "%", year, "%" + tag + "%", start, count);
     }
 }

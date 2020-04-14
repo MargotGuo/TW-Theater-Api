@@ -69,8 +69,12 @@ public class MovieController {
         return movieService.getMovieByGenres(genres);
     }
 
-    @GetMapping("/movie/category/genres={genres}&year={year}&tag={tag}")
-    public Iterable<Movie> getCategoryMovie(@PathVariable String genres, @PathVariable String year, @PathVariable String tag) {
+    @GetMapping("/movie/category/genres={genres}&year={year}&tag={tag}&start={start}&count={count}")
+    public Iterable<Movie> getCategoryMovieByCount(@PathVariable String genres,
+                                                   @PathVariable String year,
+                                                   @PathVariable String tag,
+                                                   @PathVariable Integer start,
+                                                   @PathVariable Integer count) {
         // TODO: implement this method
         return movieService.getCategoryMovies(genres, year, tag);
     }

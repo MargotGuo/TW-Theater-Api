@@ -43,8 +43,10 @@ public interface MovieRepository extends CrudRepository<Movie, String> {
     @Query("SELECT * from movie WHERE genres LIKE :genres")
     Iterable<Movie> getMovieByGenres(@Param("genres") String genres);
 
-    @Query("SELECT * from movie WHERE genres LIKE :genres AND year > :year AND tags LIKE :tag")
+    @Query("SELECT * from movie WHERE genres LIKE :genres AND year > :year AND tags LIKE :tag LIMIT :start,:count")
     Iterable<Movie> getCategoryMovies(@Param("genres") String genres,
-                                     @Param("year") String year,
-                                     @Param("tag") String tag);
+                                      @Param("year") String year,
+                                      @Param("tag") String tag,
+                                      @Param("start") Integer start,
+                                      @Param("count") Integer count);
 }
