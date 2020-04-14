@@ -16,4 +16,7 @@ public interface MovieRepository extends CrudRepository<Movie, String> {
   @Query("SELECT * FROM movie WHERE year IN ('2019', '2020') AND rating > 7")
   Iterable<Movie> getNewMovies();
 
+  @Query("SELECT * from movie ORDER BY rating DESC LIMIT 250")
+  Iterable<Movie> getTop250Movies();
+
 }

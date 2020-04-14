@@ -31,7 +31,7 @@ public class MovieController {
   @GetMapping("/movie/top250")
   public Iterable<Movie> getTop250Movies() {
     // TODO: implement this method
-    return null;
+    return movieService.getTop250Movies();
   }
 
   @GetMapping("/movie/top250?start={start}&count={count}")
