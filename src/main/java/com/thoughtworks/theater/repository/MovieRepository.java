@@ -5,6 +5,7 @@ import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -41,4 +42,9 @@ public interface MovieRepository extends CrudRepository<Movie, String> {
 
     @Query("SELECT * from movie WHERE genres LIKE :genres")
     Iterable<Movie> getMovieByGenres(@Param("genres") String genres);
+
+    @Query("SELECT * from movie WHERE genres LIKE :genres AND year > :year AND tags LIKE :tag")
+    Iterable<Movie> getCategoryMovies(@Param("genres") String genres,
+                                     @Param("year") String year,
+                                     @Param("tag") String tag);
 }

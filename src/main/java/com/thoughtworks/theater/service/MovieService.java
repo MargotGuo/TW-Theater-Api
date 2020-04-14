@@ -4,6 +4,7 @@ import com.thoughtworks.theater.entity.Movie;
 import com.thoughtworks.theater.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.MalformedInputException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -93,7 +94,7 @@ public class MovieService {
         }
         for (String director : directors) {
             if (movie.getTags().contains(director)) {
-                result ++;
+                result++;
             }
         }
         return result;
@@ -101,5 +102,9 @@ public class MovieService {
 
     public Iterable<Movie> getMovieByGenres(String genres) {
         return movieRepository.getMovieByGenres("%" + genres + "%");
+    }
+
+    public Iterable<Movie> getCategoryMovies(String genres, String year, String tag) {
+        return movieRepository.getCategoryMovies("%" + genres + "%", year, "%" + tag + "%");
     }
 }

@@ -68,4 +68,10 @@ public class MovieController {
         // TODO: implement this method
         return movieService.getMovieByGenres(genres);
     }
+
+    @GetMapping("/movie/category/genres={genres}&year={year}&tag={tag}")
+    public Iterable<Movie> getCategoryMovie(@PathVariable String genres, @PathVariable String year, @PathVariable String tag) {
+        // TODO: implement this method
+        return movieService.getCategoryMovies(genres, year, tag);
+    }
 }
