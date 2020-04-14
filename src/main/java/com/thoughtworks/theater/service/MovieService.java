@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -43,12 +44,12 @@ public class MovieService {
     }
 
     public Iterable<Movie> searchMovies(String keyword) {
-        String[] keywords = keyword.split(" ");
-        return Arrays
-                .stream(keywords)
+        String[] keywords = keyword.split("\\+");
+        return Arrays.stream(keywords)
                 .map(word -> movieRepository.searchMovieByKeyword("%" + word + "%"))
                 .flatMap((Function<List<Movie>, Stream<Movie>>) Collection::stream)
                 .distinct()
+                .filter(movie -> matchedKeywordCount(movie, keywords) >= 0.5 * keywords.length)
                 .sorted((o1, o2) -> matchedKeywordCount(o2, keywords) - matchedKeywordCount(o1, keywords))
                 .collect(Collectors.toList());
     }
