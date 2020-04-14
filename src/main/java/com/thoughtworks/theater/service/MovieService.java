@@ -28,5 +28,9 @@ public class MovieService {
     public Iterable<Movie> getTop250Movies(Integer start, Integer count) {
         return movieRepository.getTop250Movies(start, count);
     }
+
+    public Movie getMovieById(String id) {
+        return movieRepository.getMovieById(id);
+    }
     // TODO: complete this service
 }

@@ -24,4 +24,7 @@ public interface MovieRepository extends CrudRepository<Movie, String> {
     Iterable<Movie> getTop250Movies(@Param("start") Integer start,
                                     @Param("count") Integer count);
 
+    @Query("SELECT * FROM movie WHERE id = :id")
+    Movie getMovieById(@Param("id") String id);
+
 }
