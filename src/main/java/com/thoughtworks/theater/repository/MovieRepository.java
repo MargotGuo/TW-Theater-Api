@@ -10,6 +10,9 @@ import org.springframework.stereotype.Repository;
 public interface MovieRepository extends CrudRepository<Movie, String> {
   // TODO: complete this repository
 
+  @Query("SELECT * FROM movie WHERE has_ticket = TRUE")
+  Iterable<Movie> getInTheatersMovies();
+
   @Query("SELECT * FROM movie WHERE year IN ('2019', '2020') AND rating > 7")
   Iterable<Movie> getNewMovies();
 

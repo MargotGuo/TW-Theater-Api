@@ -19,7 +19,7 @@ public class MovieController {
   @GetMapping("/movie/in_theaters")
   public Iterable<Movie> getMoviesInTheaters() {
     // TODO: implement this method
-    return null;
+    return movieService.getInTheatersMovies();
   }
 
   @GetMapping("/movie/new_movies")

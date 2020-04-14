@@ -7,15 +7,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class MovieService {
 
-  private final MovieRepository movieRepository;
+    private final MovieRepository movieRepository;
 
-  public MovieService(MovieRepository movieRepository) {
-    this.movieRepository = movieRepository;
-  }
+    public MovieService(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
+    }
 
-  public Iterable<Movie> getNewMovies() {
-    return movieRepository.getNewMovies();
-  }
+    public Iterable<Movie> getInTheatersMovies() {
+        return movieRepository.getInTheatersMovies();
+    }
 
-  // TODO: complete this service
+    public Iterable<Movie> getNewMovies() {
+        return movieRepository.getNewMovies();
+    }
+
+    // TODO: complete this service
 }
