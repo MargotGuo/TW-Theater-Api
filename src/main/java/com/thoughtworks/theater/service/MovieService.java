@@ -1,5 +1,6 @@
 package com.thoughtworks.theater.service;
 
+import com.thoughtworks.theater.entity.Movie;
 import com.thoughtworks.theater.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,10 @@ public class MovieService {
 
   public MovieService(MovieRepository movieRepository) {
     this.movieRepository = movieRepository;
+  }
+
+  public Iterable<Movie> getNewMovies() {
+    return movieRepository.getNewMovies();
   }
 
   // TODO: complete this service
