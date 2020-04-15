@@ -63,7 +63,7 @@ public class MovieController {
         return movieService.getMovieById(movieId);
     }
 
-    @GetMapping("/movie/genres={genres}")
+    @GetMapping("/movie/genres/{genres}")
     public Iterable<Movie> getMovieByGenres(@PathVariable String genres) {
         // TODO: implement this method
         return movieService.getMovieByGenres(genres);
