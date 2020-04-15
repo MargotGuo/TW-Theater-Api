@@ -49,7 +49,7 @@ public class MovieService {
     }
 
     public Iterable<Movie> searchMovies(String keyword) {
-        String[] keywords = keyword.split("\\+");
+        String[] keywords = keyword.split(" ");
         return Arrays.stream(keywords)
                 .map(word -> movieRepository.searchMovieByKeyword("%" + word + "%"))
                 .flatMap((Function<List<Movie>, Stream<Movie>>) Collection::stream)
