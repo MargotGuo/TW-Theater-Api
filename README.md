@@ -169,7 +169,25 @@
     http://localhost:8080/movie/similar_movies/movieId=27199324
     ```
 
-    
+* 根据电影id获取相应的短评
+
+  * 请求描述
+
+    ```
+    http://localhost:8080/movie/comment
+    ```
+
+  * 参数
+
+    | 参数名  | 必选 | 类型   | 说明   |
+    | :------ | :--- | :----- | :----- |
+    | movieId | 是   | string | 电影id |
+
+  * 请求示例
+
+    ```
+    http://localhost:8080/movie/comment/1291561
+    ```
 
 # 任务分工
 
@@ -188,6 +206,7 @@
     * `getMovieById(String movieId)` - 林九州
     * `getMovieByGenres(String genres)` - 郭媛琦
     * `getCategoryMovieByCount(String genres, String year, String tag, Integer start, Integer count)` - 林九州
+    * `getCommentByMovieId(String movieId)`  - 郭媛琦
 * 前端
   * 林九州 - 更新api并完善前端页面
   * 郭媛琦进行了一些打杂工作 -v-
