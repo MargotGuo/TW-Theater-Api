@@ -207,6 +207,3 @@
     * `getMovieByGenres(String genres)` - 郭媛琦
     * `getCategoryMovieByCount(String genres, String year, String tag, Integer start, Integer count)` - 林九州
     * `getCommentByMovieId(String movieId)`  - 郭媛琦
-* 前端
-  * 林九州 - 更新api并完善前端页面
-  * 郭媛琦进行了一些打杂工作 -v-
