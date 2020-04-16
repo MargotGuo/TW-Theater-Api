@@ -12,7 +12,6 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends CrudRepository<Movie, String> {
 
-    // TODO: complete this repository
     @Query("SELECT * FROM movie WHERE has_ticket = TRUE")
     Iterable<Movie> getInTheatersMovies();
 

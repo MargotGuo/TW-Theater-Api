@@ -11,7 +11,6 @@ import java.util.List;
 
 @Repository
 public interface CommentRepository extends CrudRepository<Comment, String> {
-    // TODO: complete this repository
     @Query("SELECT * from comment WHERE movie_id = :movie_id")
     Iterable<Comment> getCommentByMovieId(@Param("movie_id") String movieId);
 }

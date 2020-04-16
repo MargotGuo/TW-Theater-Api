@@ -19,7 +19,6 @@ public class CommentController {
 
     @GetMapping("/movie/comment/{movieId}")
     public Iterable<Comment> getCommentByMovieId(@PathVariable String movieId) {
-        // TODO: implement this method
         return commentService.getCommentByMovieId(movieId);
     }
 }

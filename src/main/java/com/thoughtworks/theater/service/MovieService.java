@@ -16,8 +16,6 @@ import java.util.stream.Stream;
 @Service
 public class MovieService {
 
-    // TODO: complete this service
-
     private final MovieRepository movieRepository;
 
     public MovieService(MovieRepository movieRepository) {
