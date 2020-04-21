@@ -1,4 +1,4 @@
-package com.thoughtworks.theater;
+package com.thoughtworks.theater.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

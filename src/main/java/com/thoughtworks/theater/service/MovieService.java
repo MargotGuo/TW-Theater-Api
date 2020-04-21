@@ -4,11 +4,9 @@ import com.thoughtworks.theater.entity.Movie;
 import com.thoughtworks.theater.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
-import java.nio.charset.MalformedInputException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -52,12 +50,12 @@ public class MovieService {
                 .map(word -> movieRepository.searchMovieByKeyword("%" + word + "%"))
                 .flatMap((Function<List<Movie>, Stream<Movie>>) Collection::stream)
                 .distinct()
-                .filter(movie -> matchedKeywordCount(movie, keywords) >= 0.5 * keywords.length)
-                .sorted((o1, o2) -> matchedKeywordCount(o2, keywords) - matchedKeywordCount(o1, keywords))
+                .filter(movie -> getMatchedKeywordCount(movie, keywords) >= 0.5 * keywords.length)
+                .sorted((o1, o2) -> getMatchedKeywordCount(o2, keywords) - getMatchedKeywordCount(o1, keywords))
                 .collect(Collectors.toList());
     }
 
-    private int matchedKeywordCount(Movie movie, String[] keywords) {
+    private int getMatchedKeywordCount(Movie movie, String[] keywords) {
         return (int) Arrays.stream(keywords)
                 .filter(keyword -> movie.toString().contains(keyword))
                 .count();
@@ -70,15 +68,15 @@ public class MovieService {
         List<String> director = Arrays.stream(movie.getDirector().split(",")).collect(Collectors.toList());
         List<Movie> similarMovies = movieRepository.getAllMovie()
                 .stream()
-                .sorted((o1, o2) -> similarPercent(o2, genres, tags, director) - similarPercent(o1, genres, tags, director))
-                .filter(m -> similarPercent(m, genres, tags, director) > 1)
+                .sorted((o1, o2) -> getSimilarPercent(o2, genres, tags, director) - getSimilarPercent(o1, genres, tags, director))
+                .filter(m -> getSimilarPercent(m, genres, tags, director) > 1)
                 .limit(11)
                 .collect(Collectors.toList());
         similarMovies.remove(0);
         return similarMovies;
     }
 
-    public int similarPercent(Movie movie, List<String> genres, List<String> tags, List<String> directors) {
+    private int getSimilarPercent(Movie movie, List<String> genres, List<String> tags, List<String> directors) {
         int result = 0;
         for (String genre : genres) {
             if (movie.getGenres().contains(genre)) {
